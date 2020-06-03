@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock Paper Scissors</title>
+    <script>
+        const computerPlay = () => {
+            // Store choices for the computer
+            const computerChoices = ["Rock", "Paper", "Scissors"];
+            // Select a choice at random and return it
+            const computerChoice = computerChoices[Math.floor(Math.random() * computerChoices.length)];
+            console.log(`Computer chose: ${computerChoice}`);
+
+            return computerChoice;
+        };
+
+        const playerPlay = () => {
+            const playerPrompt = prompt("Enter your choice: Rock | Paper | Scissors");                 
+            // Uppercase first letter, append rest of string as lowercase it
+            const playerChoice = playerPrompt[0].toUpperCase() + playerPrompt.slice(1).toLowerCase();
+            console.log(`Player chose: ${playerChoice}`);
+
+            return playerChoice;
+        };
+
+        const playRound = (player, computer) => {
+            if ((player == 'Rock' && computer == 'Scissors') || (player == 'Paper' && computer == 'Rock') || (player == 'Scissors' && computer == 'Paper')) {
+                
+                return win(player, computer);
+            } else if ((player == 'Rock' && computer == 'Paper') || (player == 'Paper' && computer == 'Scissors') || (player == 'Scissors' && computer == 'Rock')) {
+               
+                return lose(player, computer);
+            } else {
+                return draw(player, computer);
+            }         
+        };
+
+        const win = (player, computer) => {
+            console.log( `You Win! ${player} beats ${computer}`);
+            // return `You Win! ${player} beats ${computer}`;
+            return "win";
+        };
+
+        const lose = (player, computer) => {
+            console.log( `You Lose! ${computer} beats ${player}`);
+            // return `You Lose! ${computer} beats ${player}`;
+            return "lose";
+        };
+
+        const draw = (player, computer) => {
+            console.log( `Woah, it's a Draw! ${player} same as ${computer}`);
+            // return `Woah, it's a Tie! ${player} same as ${computer}`;
+            return "draw";
+        };
+        
+        const game = () => {
+            let playerScore = 0;
+            let computerScore = 0;
+            
+            
+            for (let i = 1; i <= 5; i++) {
+                console.log(`Round: ${i}\nPlayer: ${playerScore} | Computer: ${computerScore}`);
+
+                let round = playRound(playerPlay(), computerPlay());
+
+                if (round == 'win') {
+                    playerScore++;
+                } else if (round == 'lose'){
+                    computerScore++;
+                } else {
+                    console.log('draw');
+                }
+            }
+        };
+        
+        game();
+    </script>
+</head>
+<body>
+</body>
+</html>
